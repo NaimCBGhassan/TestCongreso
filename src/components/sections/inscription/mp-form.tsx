@@ -150,7 +150,7 @@ const onSubmit = async (
 // const onReady = async () => {};
 
 const initialization: TPaymentType["initialization"] = {
-  amount: 10,
+  amount: 500,
   preferenceId: undefined,
 
   // payer: {
