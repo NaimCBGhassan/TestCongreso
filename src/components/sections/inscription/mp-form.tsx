@@ -70,11 +70,10 @@ const onSubmit = async (
   additionalData: IAdditionalCardFormData | null | undefined,
   inscriptioData: Props,
 ) => {
+  const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } =
+    inscriptioData;
   try {
-    const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } =
-      inscriptioData;
     MySwal.showLoading();
-    onMPSubmit();
     const formDataInfo = formData && {
       TransactionAmount: formData.transaction_amount,
       Token: formData.token,
@@ -113,6 +112,7 @@ const onSubmit = async (
         ...extraData,
       }),
     });
+    onMPSubmit();
 
     const data = await response.json();
 
@@ -134,6 +134,7 @@ const onSubmit = async (
     }
     return response.json();
   } catch (error: any) {
+    onMPSubmit();
     MySwal.close();
     MySwal.fire({
       title: "Error",
