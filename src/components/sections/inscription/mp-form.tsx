@@ -45,7 +45,10 @@ const MPForm = ({
     };
   }, []);
 
-  if (isLoading) return MySwal.showLoading();
+  if (isLoading) {
+    MySwal.showLoading();
+    return <></>;
+  }
 
   return (
     <Payment
