@@ -9,7 +9,9 @@ interface Props {
   onSubmit: (preferenciId: string) => void;
 }
 
-export const MySwal = withReactContent(Swal);
+export const MySwal = withReactContent(
+  Swal.mixin({ background: "#1a2a48", color: "white" }),
+);
 const useCustomFormik = ({ onSubmit }: Props) => {
   const [createPreference] = usePostPreferenceMutation();
   const formik = useFormik<DTOPreferenceReq>({

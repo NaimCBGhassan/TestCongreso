@@ -101,6 +101,7 @@ const onSubmit = async (
       mail,
     };
 
+    onMPSubmit();
     const response = await fetch(BACKEND_URL + "/payment", {
       method: "POST",
       headers: {
@@ -111,23 +112,32 @@ const onSubmit = async (
         ...extraData,
       }),
     });
+    debugger;
 
     const data = await response.json();
 
-    if (data.payment.apiResponse.statusCode === 201) {
+    if (response.status === 200) {
       MySwal.fire({
-        title: "Éxito",
-        text: "El pago se concreto correctamente.",
-        icon: "success",
+        title: "Información",
+        text: data.message,
+        icon: "info",
       });
     }
 
-    onMPSubmit();
+    if (response.status >= 400) {
+      MySwal.fire({
+        title: "Error",
+        text: data.message,
+        icon: "error",
+      });
+    }
+
     return response.json();
-  } catch (error) {
+  } catch (error: any) {
+    debugger;
     MySwal.fire({
       title: "Error",
-      text: "Hubo un problema al enviar los valores.",
+      text: error.message,
       icon: "error",
     });
   }
