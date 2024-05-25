@@ -6,7 +6,7 @@ import {
   TPaymentType,
 } from "@mercadopago/sdk-react/bricks/payment/type";
 import { initMercadoPago } from "@mercadopago/sdk-react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MySwal } from "@/hooks/useCustomFormik";
 
 const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY;
