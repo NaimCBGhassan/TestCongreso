@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.marker {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+.touch-action-none {
+  touch-action: none;
+}
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+/* Ancho del scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px; /* Para barras de desplazamiento horizontales */
+}
+
+/* Pista del scrollbar */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px; /* Redondear bordes de la pista */
+}
+
+/* Pulgar del scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(26, 42, 72);
+  border-radius: 10px; /* Redondear bordes del pulgar */
+  border: 3px solid #f1f1f1;
+  height: 40%; /* Ajustar el ancho del pulgar al 80% */
+}
+
+/* Pulgar del scrollbar en hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
