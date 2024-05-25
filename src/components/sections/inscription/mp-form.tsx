@@ -34,7 +34,6 @@ const MPForm = ({
   onMPSubmit,
 }: Props) => {
   initialization.preferenceId = preferenceId;
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -45,30 +44,20 @@ const MPForm = ({
     };
   }, []);
 
-  if (isLoading) {
-    MySwal.showLoading();
-    return <></>;
-  }
-
   return (
     <Payment
       initialization={initialization}
       customization={customization}
       onSubmit={(paymentFormData, additionalData) =>
-        onSubmit(
-          paymentFormData,
-          additionalData,
-          {
-            firstName,
-            lastName,
-            DNI,
-            phoneNumber,
-            mail,
-            onMPSubmit,
-            preferenceId,
-          },
-          setIsLoading,
-        )
+        onSubmit(paymentFormData, additionalData, {
+          firstName,
+          lastName,
+          DNI,
+          phoneNumber,
+          mail,
+          onMPSubmit,
+          preferenceId,
+        })
       }
     />
   );
@@ -80,12 +69,11 @@ const onSubmit = async (
   { formData, selectedPaymentMethod }: IPaymentFormData,
   additionalData: IAdditionalCardFormData | null | undefined,
   inscriptioData: Props,
-  setIsLoading: Dispatch<SetStateAction<boolean>>,
 ) => {
   try {
     const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } =
       inscriptioData;
-    setIsLoading(true);
+    MySwal.showLoading();
     onMPSubmit();
     const formDataInfo = formData && {
       TransactionAmount: formData.transaction_amount,
@@ -128,6 +116,7 @@ const onSubmit = async (
 
     const data = await response.json();
 
+    MySwal.close();
     if (response.status === 200) {
       MySwal.fire({
         title: "Información",
@@ -143,17 +132,15 @@ const onSubmit = async (
         icon: "error",
       });
     }
-    setIsLoading(false);
     return response.json();
   } catch (error: any) {
+    MySwal.close();
     MySwal.fire({
       title: "Error",
       text: error.message,
       icon: "error",
     });
-    setIsLoading(false);
   }
-  setIsLoading(false);
 };
 
 // const onError = async (error: object) => {
