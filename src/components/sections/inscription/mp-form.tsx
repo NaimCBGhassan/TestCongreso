@@ -6,7 +6,7 @@ import {
   TPaymentType,
 } from "@mercadopago/sdk-react/bricks/payment/type";
 import { initMercadoPago } from "@mercadopago/sdk-react";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { MySwal } from "@/hooks/useCustomFormik";
 
 const MP_PUBLIC_KEY = process.env.NEXT_PUBLIC_MP_PUBLIC_KEY;
@@ -34,6 +34,7 @@ const MPForm = ({
   onMPSubmit,
 }: Props) => {
   initialization.preferenceId = preferenceId;
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -44,20 +45,27 @@ const MPForm = ({
     };
   }, []);
 
+  if (isLoading) return MySwal.showLoading();
+
   return (
     <Payment
       initialization={initialization}
       customization={customization}
       onSubmit={(paymentFormData, additionalData) =>
-        onSubmit(paymentFormData, additionalData, {
-          firstName,
-          lastName,
-          DNI,
-          phoneNumber,
-          mail,
-          onMPSubmit,
-          preferenceId,
-        })
+        onSubmit(
+          paymentFormData,
+          additionalData,
+          {
+            firstName,
+            lastName,
+            DNI,
+            phoneNumber,
+            mail,
+            onMPSubmit,
+            preferenceId,
+          },
+          setIsLoading,
+        )
       }
     />
   );
@@ -69,10 +77,13 @@ const onSubmit = async (
   { formData, selectedPaymentMethod }: IPaymentFormData,
   additionalData: IAdditionalCardFormData | null | undefined,
   inscriptioData: Props,
+  setIsLoading: Dispatch<SetStateAction<boolean>>,
 ) => {
   try {
     const { DNI, firstName, lastName, phoneNumber, mail, onMPSubmit } =
       inscriptioData;
+    setIsLoading(true);
+    onMPSubmit();
     const formDataInfo = formData && {
       TransactionAmount: formData.transaction_amount,
       Token: formData.token,
@@ -101,7 +112,6 @@ const onSubmit = async (
       mail,
     };
 
-    onMPSubmit();
     const response = await fetch(BACKEND_URL + "/payment", {
       method: "POST",
       headers: {
@@ -112,7 +122,6 @@ const onSubmit = async (
         ...extraData,
       }),
     });
-    debugger;
 
     const data = await response.json();
 
@@ -131,16 +140,17 @@ const onSubmit = async (
         icon: "error",
       });
     }
-
+    setIsLoading(false);
     return response.json();
   } catch (error: any) {
-    debugger;
     MySwal.fire({
       title: "Error",
       text: error.message,
       icon: "error",
     });
+    setIsLoading(false);
   }
+  setIsLoading(false);
 };
 
 // const onError = async (error: object) => {
