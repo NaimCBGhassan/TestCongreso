@@ -14,7 +14,6 @@ export default function Input({ className, error, ...rest }: InputProps) {
         className={cn(
           "w-full rounded-[1.2rem] border-2 bg-transparent px-6 py-2 text-lg text-white outline-none focus:border-4 focus:border-secondary",
           className,
-          error && 'border-red-400'
         )}
         {...rest}
       />

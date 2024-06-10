@@ -1,4 +1,3 @@
-import Inscription from "@/components/sections/inscription";
 import Objectives from "@/components/sections/objectives";
 import Chronogram from "@/components/sections/chronogram";
 import Contact from "@/components/sections/contact";
@@ -42,7 +41,6 @@ export default function Home() {
       <Objectives />
       <Themes />
       <Chronogram />
-      {/* <Inscription /> */}
       <div className="relative">
         <Contact />
         <Footer />

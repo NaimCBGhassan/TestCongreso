@@ -28,7 +28,7 @@ export const chonogram: ChonogramI[] = [
       coursesHours: [
         "8:00 Acreditación",
         "8:30 Apertura y presentación",
-        "9:00 Dr. Carlos Torrendell (A confirmar)",
+        "9:00 Dr. Carlos Torrendell",
         "9:30 Dr. Horacio Ferreyra",
         "10:00 Dra. Catherine L'Ecuyer",
         "10:45 Preguntas",
@@ -68,7 +68,7 @@ export const chonogram: ChonogramI[] = [
         "9:30 Preguntas",
         "9:45 P. Marcelo Benítez Sch.P",
         "10:30 Pausa",
-        "10:45 Conversatorio sobre la Paideia Griega y la Educación en los Padres de la Iglesia",
+        "10:45 Conversatorio sobre la Paideia Griega y la Educación en los Padres de la Iglesia (Dr. Cornavaca, Dr. Pedro Villagra y Dr.Caballero)",
         "11:45 Dra. Graciela Hernandez",
         "12:30 Santa Misa",
         "13:30 Almuerzo/Pausa",
@@ -95,7 +95,7 @@ export const chonogram: ChonogramI[] = [
       title: "Mañana",
       coursesHours: [
         "8:30 Recepción y oración",
-        "8:45 Conversatorio acerca de la amistad",
+        "8:45 Conversatorio Acerca de la Amistad y las Artes Liberales (Dr. Peretó Rivas)",
         "9:30 Preguntas",
         "9:45 P. Andrés Rodríguez de Cristo Sch.P",
         "10:15 Lic. Virginia Montini",
